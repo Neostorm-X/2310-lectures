@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Boid : MonoBehaviour
 {
     private Flock flock;
@@ -63,6 +64,10 @@ public class Boid : MonoBehaviour
 
         //TODO: Basic Euler integration using calculated forces.
         //Calculate acceleration, update velocity and position.
+
+        Vector3 netForce = Vector3.ClampMagnitude(cohesion + alignment + separation,
+            flock.maxForce);
+
     }
 
     //The flock script will call this function on the boid every frame after its main update.
