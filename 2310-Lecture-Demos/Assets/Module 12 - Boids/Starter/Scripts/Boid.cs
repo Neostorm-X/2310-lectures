@@ -68,6 +68,14 @@ public class Boid : MonoBehaviour
         Vector3 netForce = Vector3.ClampMagnitude(cohesion + alignment + separation,
             flock.maxForce);
 
+        Vector3 acceleration = netForce;
+
+        //Update velocity.
+        velocity = MathUtility.ConstrainVector(velocity + acceleration * Time.deltaTime, flock.minSpeed, flock.maxSpeed);
+
+        //Update position.
+        transform.position = transform.position + velocity * Time.deltaTime;
+
     }
 
     //The flock script will call this function on the boid every frame after its main update.
